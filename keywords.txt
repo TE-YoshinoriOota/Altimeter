@@ -1,0 +1,105 @@
+#########################################################
+# Syntax Coloring Map for Altimeter                     #
+#########################################################
+# Class
+#########################################################
+
+Altimeter		KEYWORD1
+BMI270Class		KEYWORD1
+BMP581			KEYWORD1
+AltitudeEstimator	KEYWORD1
+
+#########################################################
+# Methods and Functions
+#########################################################
+
+begin	 			KEYWORD2
+startCalibration 		KEYWORD2
+startSensing	 		KEYWORD2
+endSensing	 		KEYWORD2
+setSensingInteraval	 	KEYWORD2
+setUpdateInterval 		KEYWORD2
+setAccelSigma	 		KEYWORD2
+setGyroSigma	 		KEYWORD2
+setBaroSigma	 		KEYWORD2
+setConstantAccel 		KEYWORD2
+setZeroVelocityThreshold 	KEYWORD2
+setIIRFilter		 	KEYWORD2
+setAverageFilter	 	KEYWORD2
+setBarometerMode	 	KEYWORD2
+setFusionMode	 		KEYWORD2
+setSeaLevelPressure 		KEYWORD2
+setDebugMode		 	KEYWORD2
+getSensingInterval	 	KEYWORD2
+getUpdateInterval	 	KEYWORD2
+getCalibrationTimeout	 	KEYWORD2
+getMonitorTimeout	 	KEYWORD2
+getIIRFilterMode	 	KEYWORD2
+getAccelSigma		 	KEYWORD2
+getGyroSigma		 	KEYWORD2
+getBaroSigma		 	KEYWORD2
+getConstantAccel	 	KEYWORD2
+getAccelThreshold	 	KEYWORD2
+isBegin			 	KEYWORD2
+isCalibrated		 	KEYWORD2
+isUpdate		 	KEYWORD2
+isFusionMode		 	KEYWORD2
+isAverageFilterMode	 	KEYWORD2
+isDebugMode		 	KEYWORD2
+getTemperature		 	KEYWORD2
+getPressure		 	KEYWORD2
+getTemperature		 	KEYWORD2
+getAltitude		 	KEYWORD2
+getFusionAltitude	 	KEYWORD2
+getBaroAltitude		 	KEYWORD2
+
+#########################################################
+# private functions
+#########################################################
+isMonitorEnd			KEYWORD3
+setCalibrated			KEYWORD3
+push_pressure			KEYWORD3
+push_temp			KEYWORD3
+push_fusion_altitude		KEYWORD3
+push_baro_altitude		KEYWORD3
+updateTemperature		KEYWORD3
+updatePressure			KEYWORD3
+updateAltitude			KEYWORD3
+altitude_estimation		KEYWORD3
+get_calib_thresh		KEYWORD3
+calc_baro_altitude		KEYWORD3
+imu_read			KEYWORD3
+bmi270_configure_sensor		KEYWORD3
+bmi270_print_err		KEYWORD3
+panic_led_trap			KEYWORD3
+
+
+#########################################################
+# Constants
+#########################################################
+
+SEALEVELPRESSURE_HPA  		LITERAL1
+G_CONSTANT			LITERAL1
+DEFAULT_SENSING_INTERVAL_mSEC	LITERAL1
+DEFAULT_UPDATE_INTERVAL_SEC	LITERAL1
+DEFAULT_CALIB_STABILITY_COUNT 	LITERAL1
+DEFAULT_SIGMA_ACCEL_VALUE	LITERAL1
+DEFAULT_SIGMA_GYRO_VALUE	LITERAL1
+DEFAULT_SIGMA_BARO_VALUE 	LITERAL1
+DEFAULT_CONST_ACCEL_VALUE 	LITERAL1
+DEFAULT_ACCEL_THRESH_VALUE 	LITERAL1
+
+
+#########################################################
+# enum
+#########################################################
+
+IIR_BANDWIDTH  			LITERAL3
+IIR_BANDWIDTH_00_3HZ  		LITERAL3
+IIR_BANDWIDTH_00_6HZ 		LITERAL3
+IIR_BANDWIDTH_01_2HZ  		LITERAL3
+IIR_BANDWIDTH_02_5HZ  		LITERAL3
+IIR_BANDWIDTH_05_1HZ  		LITERAL3
+IIR_BANDWIDTH_11_0HZ  		LITERAL3
+IIR_BANDWIDTH_27_5HZ  		LITERAL3
+IIR_BANDWIDTH_BYPASS  		LITERAL3
