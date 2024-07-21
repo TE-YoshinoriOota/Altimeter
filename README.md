@@ -43,7 +43,7 @@ Here is the hardware configuration.
 # License
 This program contains multiple open-source licenses.
 
-- Altimeter library under the LGPL2.1
-- The driver of BMI270 under the LGPL2.1
-- The driver of BMP581 under the MIT license
-- The two-step Kalman/Complementary filter under the BSD3 Clause license
+- Altimeter library under the [LGPL2.1](https://github.com/TE-YoshinoriOota/Altimeter/blob/main/LICENSE-LGPL2.1)
+- The driver of BMI270 under the [LGPL2.1](https://github.com/TE-YoshinoriOota/Altimeter/blob/main/LICENSE-LGPL2.1)
+- The driver of BMP581 under the [MIT license](https://github.com/TE-YoshinoriOota/Altimeter/blob/main/LICENSE-MIT)
+- The two-step Kalman/Complementary filter under the [BSD-3-Clause license](https://github.com/TE-YoshinoriOota/Altimeter/blob/main/LICENSE-BSD)
