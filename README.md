@@ -76,6 +76,11 @@ The example contains the base_altimeter, the device_altimeter, and Python progra
 The BLE device on Spresense to connect the BLE central on a Host PC running Python program above is [BLE1507](https://crane-elec.co.jp/products/vol-24/).
 You can get the Arduino library from [here](https://github.com/TE-YoshinoriOota/BLE1507_Arduino)
 
+<br/>
+
+![image](https://github.com/user-attachments/assets/1c7bcd55-1adb-4024-8c72-2d637f3400f3)
+
+
 
 
 # License
