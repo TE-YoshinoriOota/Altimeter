@@ -63,12 +63,14 @@ There are five parameters for the filter. It should be calibrated for each use c
 | AccelSigma     | Sigma value of Acceleration Sensor  | 0.03 - 0.001  | 0.01 | 
 | GyroSigma      | Sigma value of Gyroscope   | 0.03 - 0.001  |  0.01 |
 | BaroSigma      | Sigma value of Barometer   | 0.1 - 0.01  | 0.03 |
-| ConstantAccel  | Constant Acceleration value for a model in the Kalman Filter  | 0.2 - 0.05  | 0.1  | 
+| ConstantAccel  | The constant acceleration value for a model in the Kalman Filter  | 0.2 - 0.05  | 0.1  | 
 | AccelThreshold | Threshold value of the acceleration to reset the offset caused by sensor drift  | 0.05 - 0.005  | 0.02  | 
 
 <br/>
+
 These parameters should be set for the use case that you want to apply. Please do the experiments to fix these value before the deployment.
-For the detail of the Contant Acceleration and the threshold value of the acceleration, please refer to [this paper](https://simondlevy.academic.wlu.edu/files/2022/11/TwoStepFilter.pdf).
+For the details of the contant acceleration and the threshold value of the acceleration, 
+please refer to [this paper](https://simondlevy.academic.wlu.edu/files/2022/11/TwoStepFilter.pdf).
 
 ### Differential measurement
 If you want to measure the height of two different points, you can refer to the diff_altitude example. 
