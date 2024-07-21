@@ -36,12 +36,16 @@ The BLE device on Spresense to connect the BLE central on a Host PC running Pyth
 You can get the Arduino library from [here](https://github.com/TE-YoshinoriOota/BLE1507_Arduino)
 
 # Hardware Configuration
-Here is the hardware configuration. 
+Here is the hardware configuration for the Altimeter system
 
 - [Spresense Main Board](https://developer.sony.com/spresense/products/spresense-main-board/)
 - [Spresense Extension Board](https://developer.sony.com/spresense/products/spresense-ext-board/) or [LTE-M Extension Board](https://developer.sony.com/spresense/products/spresense-lte-ext-board/)
 - [SparkFun BMP581](https://www.sparkfun.com/products/20170)
 - Self-made BMI270 Addon Board (if you want to use the diff_altitude example)
+
+### Base Altimeter Configuration
+
+### Hand-carried Altimeter Configuration
 
 # License
 This program contains multiple open-source licenses.
