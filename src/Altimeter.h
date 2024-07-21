@@ -75,7 +75,7 @@ class AltimeterClass {
     void endSensing() { m_monitor_end = true; }
 
     void setSensingInteraval(int msec) { m_interval_msec = msec; }
-    void setUpdateInterval(int msec) { m_update_sec = msec; }
+    void setUpdateInterval(int sec) { m_update_sec = sec; }
 
     void setAccelSigma(float sigma) { m_altitude.updateSigmaAccel(sigma); }
     void setGyroSigma(float sigma) { m_altitude.updateSigmaGyro(sigma); }
