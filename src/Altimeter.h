@@ -1,3 +1,24 @@
+/*
+ * Altimeter.h
+ * Copyright (c) 2024 Yoshinori Oota
+ *
+ * This file is part of Altimeter
+ *
+ * Altimeter is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ */
+
 #ifndef ALTIMETER_HEADER_GUARD
 #define ALTIMETER_HEADER_GUARD
 
@@ -23,13 +44,13 @@ const int SEALEVELPRESSURE_HPA = 1013.25;
 const int G_CONSTANT = 9.81;
 const int DEFAULT_SENSING_INTERVAL_mSEC = 20; // msec
 const int DEFAULT_UPDATE_INTERVAL_SEC = 1; // sec
-const float DEFAULT_CALIB_THRESH_CONV = 0.15; // meter
-const float DEFAULT_CALIB_THRESH_DIFF = 1.80; // meter
+const float DEFAULT_CALIB_THRESH_CONV = 0.10; // meter
+const float DEFAULT_CALIB_THRESH_DIFF = 0.02; // meter
 const int DEFAULT_CALIB_STABILITY_COUNT = 10; 
 
 const float DEFAULT_SIGMA_ACCEL_VALUE = 0.01;
 const float DEFAULT_SIGMA_GYRO_VALUE = 0.01;
-const float DEFAULT_SIGMA_BARO_VALUE = 0.03;
+const float DEFAULT_SIGMA_BARO_VALUE = 0.05;
 const float DEFAULT_CONST_ACCEL_VALUE = 0.1;
 const float DEFAULT_ACCEL_THRESH_VALUE = 0.02;
 
@@ -42,7 +63,9 @@ class AltimeterClass {
   public:
     AltimeterClass();
     ~AltimeterClass();
-    bool begin(uint32_t interval_msec = DEFAULT_SENSING_INTERVAL_mSEC
+    bool begin(uint8_t bmi_chip_id = BMI2_I2C_SEC_ADDR
+              ,uint8_t bmp_chip_id = BMP581_I2C_ADDRESS_DEFAULT
+              ,uint32_t interval_msec = DEFAULT_SENSING_INTERVAL_mSEC
               ,uint32_t update_sec = DEFAULT_UPDATE_INTERVAL_SEC
               ,enum IIR_BANDWIDTH bw = IIR_BANDWIDTH_00_3HZ
               ,bool average_filter = true 

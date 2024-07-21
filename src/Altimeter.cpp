@@ -1,3 +1,25 @@
+/*
+ * Altimeter.cpp
+ * Copyright (c) 2024 Yoshinori Oota
+ *
+ * This file is part of Altimeter
+ *
+ * Altimeter is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ */
+
+
 #include "Altimeter.h"
 
 AltimeterClass Altimeter;
@@ -8,12 +30,13 @@ pthread_t monitor_thread;
 
 extern "C" {
 
-  /* calibration thread */
+  /************************************/
+  /*       calibration thread         */
+  /************************************/
   void* do_calibration_thread(void *arg) {
 
     if (Altimeter.isCalibrated()) {
       fprintf(stderr, "WARNING: the system is already calibrated.\n");
-      return nullptr;
     }
     if (!Altimeter.isBegin()) {
       fprintf(stderr, "ERROR: BMP581 and/or BMI270 is not initialized\n");
@@ -21,7 +44,6 @@ extern "C" {
     }
     if (!Altimeter.isFusionMode()) {
       fprintf(stderr, "WARNING: not fusion mode. the altitude caluculated only barometer.\n");
-      return nullptr;
     }
 
     static uint32_t start_calibration_time_ms = millis();
@@ -86,7 +108,9 @@ extern "C" {
     return nullptr;
   }
 
-  /* monitoring thread */
+  /****************************************/
+  /*           monitoring thread          */
+  /****************************************/
   void* do_monitor_thread(void *arg) {
     if (!Altimeter.isBegin()) {
       fprintf(stderr, "ERROR: BMP581 and/or BMI270 is not initialized\n");
@@ -98,11 +122,9 @@ extern "C" {
     }
     if (!Altimeter.isAverageFilterMode()) {
       fprintf(stderr, "WARNING: not average mode. the altitude is measured only by single shot data.\n");
-      return nullptr;
     }
     if (!Altimeter.isFusionMode()) {
       fprintf(stderr, "WARNING: not fusion mode. the altitude caluculated only barometer.\n");
-      return nullptr;
     }
 
     static uint32_t start_monitor_time_sec = millis() / 1000;
@@ -123,7 +145,7 @@ extern "C" {
       Altimeter.push_baro_altitude(baro_altitude);
 
       uint32_t update_duration_sec = current_sec - last_update_sec;
-      if (update_duration_sec > Altimeter.getUpdateInterval()) {
+      if (update_duration_sec >= Altimeter.getUpdateInterval()) {
         Altimeter.updateTemperature();
         Altimeter.updatePressure();
         Altimeter.updateAltitude();
@@ -201,13 +223,14 @@ AltimeterClass::~AltimeterClass() {
   }
 }
 
-bool AltimeterClass::begin(uint32_t interval_msec, uint32_t update_sec
+bool AltimeterClass::begin(uint8_t bmi_chip_id, uint8_t bmp_chip_id
+                          ,uint32_t interval_msec, uint32_t update_sec
                           ,enum IIR_BANDWIDTH bw, bool average_filter) {
   m_interval_msec = interval_msec;
   m_update_sec = update_sec;
 
   // initialize BMI270 IMU Sensor
-  if (!m_bmi270.begin()) {
+  if (!m_bmi270.begin(bmi_chip_id)) {
     fprintf(stderr, "BMI270 failed to begin\n");
     while(1);
   }
@@ -221,7 +244,7 @@ bool AltimeterClass::begin(uint32_t interval_msec, uint32_t update_sec
 
   // initialize BMP581 Pressure Sensor
   uint8_t retry = 0;
-  while (m_bmp581.beginI2C(BMP581_I2C_ADDRESS_DEFAULT) != BMP5_OK) {
+  while (m_bmp581.beginI2C(bmp_chip_id) != BMP5_OK) {
     fprintf(stderr, "ERROR: BMP581 not connected, check wiring and I2C address!\n");
     delay(1000);
     if (retry++ == 10) {
@@ -427,8 +450,9 @@ void AltimeterClass::updatePressure() {
 }
 
 void AltimeterClass::updateAltitude() {
+  float altitude;
   if (m_average_filter) {
-    float altitude = 0.0;
+    altitude = 0.0;
     for (int n = 0; n < m_array_size; ++n) {
       altitude += m_fusion_altitude_array[n];
     }
@@ -507,9 +531,9 @@ bool AltimeterClass::altitude_estimation(
     *baro_altitude = calc_baro_altitude(*pressure);
 
     // get imu data
-    uint32_t timestamp = micros();
     float accelData[3];
     float gyroData[3];
+    uint32_t timestamp = micros();
     imu_read(gyroData, accelData);
 
     // perform altitude estimation
@@ -530,20 +554,22 @@ float AltimeterClass::calc_baro_altitude(float pressure) {
 
 
 bool AltimeterClass::imu_read(float gyro[3], float accel[3]) {
-  // get IMU sensor data
+  /* get IMU sensor data */
   if (m_bmi270.accelerationAvailable() && m_bmi270.gyroscopeAvailable()) { 
     float ax, ay, az;
     float gx, gy, gz;
     m_bmi270.readAcceleration(ax, ay, az);
     m_bmi270.readGyroscope(gx, gy, gz);
-    // Copy gyro values back out in rad/sec
+    /* Copy gyro values back out in rad/sec */
     gyro[0] = gx * M_PI / 180.0f;
     gyro[1] = gy * M_PI / 180.0f;
     gyro[2] = gz * M_PI / 180.0f;
-    // acceleration values in per G
-    accel[0] = ax/G_CONSTANT;
-    accel[1] = ay/G_CONSTANT;
-    accel[2] = az/G_CONSTANT;
+    // fprintf(stderr, "gyro: %f, %f, %f\n", gyro[0], gyro[1], gyro[2]);
+    /* acceleration values in per G */
+    accel[0] = ax;
+    accel[1] = ay;
+    accel[2] = az;
+    // fprintf(stderr, "accel: %f, %f, %f\n", accel[0], accel[1], accel[2]);
     return true;
   } else {
     fprintf(stderr, "ERROR: BMI270 cannot read\n");

@@ -16,6 +16,7 @@
   License along with this library; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
+
 #ifndef BMI270_HEADER_GUARD
 #define BMI270_HEADER_GUARD
 
@@ -36,7 +37,7 @@ class BMI270Class {
     void setContinuousMode();
     void oneShotMode();
 
-    int begin();
+    int begin(uint8_t chip_id = BMI2_I2C_PRIM_ADDR);
     void end();
 
     // Accelerometer

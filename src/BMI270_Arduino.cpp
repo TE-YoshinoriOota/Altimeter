@@ -1,3 +1,22 @@
+/*
+  This file is part of the Arduino_LSM9DS1 library.
+  Copyright (c) 2019 Arduino SA. All rights reserved.
+
+  This library is free software; you can redistribute it and/or
+  modify it under the terms of the GNU Lesser General Public
+  License as published by the Free Software Foundation; either
+  version 2.1 of the License, or (at your option) any later version.
+
+  This library is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this library; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+*/
+
 #include "Arduino.h"
 #include "Wire.h"
 #include "BMI270_Arduino.h"
@@ -7,11 +26,11 @@ BMI270Class::BMI270Class(TwoWire& wire) {
 }
 
 
-int BMI270Class::begin() {
+int BMI270Class::begin(uint8_t chip_id) {
 
   _wire->begin();
 
-  bmi2.chip_id = BMI2_I2C_SEC_ADDR;
+  bmi2.chip_id = chip_id;
   bmi2.read = bmi2_i2c_read;
   bmi2.write = bmi2_i2c_write;
   bmi2.delay_us = bmi2_delay_us;
