@@ -30,7 +30,7 @@ Here is the hardware configuration for the Altimeter system. The base altimeter 
 - [Spresense Extension Board](https://developer.sony.com/spresense/products/spresense-ext-board/) or [LTE-M Extension Board](https://developer.sony.com/spresense/products/spresense-lte-ext-board/)
 - [SparkFun BMP581](https://www.sparkfun.com/products/20170)
 - Self-made BMI270 Addon Board (if you want to use the diff_altitude example)
-- [BLE1507](https://crane-elec.co.jp/products/vol-24/) (if you want to do the diffrential measurement)
+- [BLE1507](https://crane-elec.co.jp/products/vol-24/) (if you want to do the differential measurement)
 
 ### Base Altimeter Configuration
 ![image](https://github.com/user-attachments/assets/6689577a-6a2c-4e4c-8ba6-e52f75bb702e)
@@ -105,6 +105,8 @@ You can get the Arduino library from [here](https://github.com/TE-YoshinoriOota/
 | setSeaLevelPressure      |             |         |
 | setCalibConversionThresh |             |         |
 | setCalibDiffThresh       |             |         |
+| isCalibrated             |             |         |
+| isUpdate                 |             |         |
 | getTemperature           |             |         |
 | getPressure              |             |         |
 | getAltitude              |             |         |
