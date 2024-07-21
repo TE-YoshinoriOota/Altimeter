@@ -83,6 +83,31 @@ You can get the Arduino library from [here](https://github.com/TE-YoshinoriOota/
 ![image](https://github.com/user-attachments/assets/1c7bcd55-1adb-4024-8c72-2d637f3400f3)
 
 
+### Overview of Altimeter Library
+
+| API name                 | Description | Default |
+| ------------------------ | ----------- | ------- |
+| begin                    |             |         |
+| startCalibration         |             |         |
+| startSensing             |             |         |
+| endSensing               |             |         |
+| setSensingInterval       |             |         |
+| setUpdateInterval        |             |         |
+| setAccelSigma            |             |         |
+| setGyroSigma             |             |         |
+| setBaroSigma             |             |         |
+| setConstantAccel         |             |         |
+| setAccelThreshold        |             |         |
+| setIIRFilter             |             |         |
+| setAverageFilter         |             |         |
+| setBarometerMode         |             |         |
+| setFusionMode            |             |         |
+| setSeaLevelPressure      |             |         |
+| setCalibConversionThresh |             |         |
+| setCalibDiffThresh       |             |         |
+| getTemperature           |             |         |
+| getPressure              |             |         |
+| getAltitude              |             |         |
 
 
 # License
