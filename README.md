@@ -85,32 +85,50 @@ You can get the Arduino library from [here](https://github.com/TE-YoshinoriOota/
 
 ### Overview of Altimeter Library
 
+The Altimeter library is started by calling the "begin" function. The device addresses of the BMI270 and BMP581 can be specified through the arguments of the begin function.
+
+Before sensing altitude, the altimeter should be calibrated by calling "startCalibration." Depending on the environment, this process can take tens of seconds. The end of calibration can be detected by calling the "isCalibrated" function. "startCalibration" can set a timeout, but the default is no timeout. The calibration algorithm uses two parameters: the calibration conversion threshold value of the fluctuation of the Kalman/Complementary filter output, and the differential threshold value between the barometer output and the filter output. The "setCalibConversionThresh" function can set the calibration conversion threshold value, and the "setCalibDiffThresh" function can set the differential threshold value. These functions should be called before "startCalibration" if you want to change these parameters.
+
+The "startSensing" starts sensing altitude. The sensing process has two stages. The first stage is to accumulate sensed and estimated altitude data, the second stage is to calculate and filter the accumulated altitude data. The updated altitude data is processed using an IIR Filter and an Average Filter. The sample number of the Average Filter can be calculated by the update interval time divided by the sensing interval time. The default is 50 samples (= 1000 msec / 20 msec) There are two ways to end sensing altitude, the one way is to set the monitoring time specifying the argument of "startSensing", and the other way is to call "endSensing".  
+
+The important parameters for the Kalman/Complementary filter can be set by the functions of "setAccelSigma", "setGyroSigma", "setBaroSigma", "setConstantAccel", "setAccelThreshold". For the technical background of these parameters, please refer to [this paper](https://simondlevy.academic.wlu.edu/files/2022/11/TwoStepFilter.pdf).
+
+"setSeaLevelPressure" can set the sea level pressure value. If you can get the sea level pressure value through the internet, you may acquire precise altitude values. The default value is 1013.25 Pa for tentative.
+
+The "getTemperature" and "getPressure" return BMP581 output. These values are filtered by an IIR filter and an average filter if they are enabled.
+The "getAltitude" returns the estimated altitude value. In the barometer mode, it returns the altitude value estimated by the barometer value. In the fusion mode, it returns the altitude value estimated by Kalman/Complementary filter value.
+
+
 | API name                 | Description | Default |
 | ------------------------ | ----------- | ------- |
-| begin                    |             |         |
-| startCalibration         |             |         |
-| startSensing             |             |         |
-| endSensing               |             |         |
-| setSensingInterval       |             |         |
-| setUpdateInterval        |             |         |
-| setAccelSigma            |             |         |
-| setGyroSigma             |             |         |
-| setBaroSigma             |             |         |
-| setConstantAccel         |             |         |
-| setAccelThreshold        |             |         |
-| setIIRFilter             |             |         |
-| setAverageFilter         |             |         |
-| setBarometerMode         |             |         |
-| setFusionMode            |             |         |
-| setSeaLevelPressure      |             |         |
-| setCalibConversionThresh |             |         |
-| setCalibDiffThresh       |             |         |
-| isCalibrated             |             |         |
-| isUpdate                 |             |         |
-| getTemperature           |             |         |
-| getPressure              |             |         |
-| getAltitude              |             |         |
+| begin                    | begin the library | BMI270 address: BMI2_I2C_SEC_ADDR, <br/> BMP581 address: BMP581_I2C_ADDRESS_DEFAULT  |
+| startCalibration         | start calibration | no timeout|
+| startSensing             | start sensing     | this API must be called after the calibration |
+| endSensing               | end sensing       |          |
+| setSensingInterval       | set the interval time for sensing altitude  | 20 msec      |
+| setUpdateInterval        | set the interval time for updating sensed altitude | 1 sec        |
+| setAccelSigma            | the sigma accel value for the Kalman filter    | 0.01 |
+| setGyroSigma             | the sigma gyro value for the Kalman filter     | 0.01 |
+| setBaroSigma             | the sigma baro value for the Kalman filter     | 0.03 |
+| setConstantAccel         | the constant accel value for the Kalman filter | 0.1  |
+| setAccelThreshold        | the threshold accel value for the complementary filter  | 0.02 |
+| setIIRFilter             | set the IIR filter for sensed altitude data  | 0.3Hz        |
+| setAverageFilter         | set the average filter for sensed altitude data  |  50 samples  |
+| setBarometerMode         | output of "getAltitude" is altitude value estimated by barometer value  |  false  |
+| setFusionMode            | output of "getAltitude" is altitude value estimated by Kalman/Complementary filter value |  true  |
+| setSeaLevelPressure      | set the sea level pressure value       |  1013.25 Pa       |
+| setCalibConversionThresh | set the calibration conversion threshold value for the Kalman filter  |  0.1 meters       |
+| setCalibDiffThresh       | set the calibration conversion threshold value between the Kalman filter output and the barometer output  | 0.02 meters  |
+| setSeaLevelPressure      | set the sea level pressure value       |  1013.25 Pa       |
+| isCalibrated             | if the calibration is ended, return true   |         |
+| isUpdate                 | if the updated estimated altitude is calculated, return true   |         |
+| getTemperature           | return the temperature value of BMP581    |         |
+| getPressure              | return the pressure value sensed by BMP581           |         |
+| getAltitude              | return the estimated altitude value | fusion output   |
+| getFusionAltitude        | return the estimated altitude value by the Kalman/Complementary filter output  |    |
+| getBaroAltitude          | return the estimated altitude value by the barometer (BMP581) output  |    |
 
+For details of these APIs, please refer to the [header file](https://github.com/TE-YoshinoriOota/Altimeter/blob/main/src/Altimeter.h) of this library.
 
 # License
 This program contains multiple open-source licenses.
