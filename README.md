@@ -20,10 +20,13 @@ In my experiments, the accuracy achieved to ±0.15 m.
 # Software Configuration
 For details about the Spresense development environment, please visit [this site](https://developer.sony.com/spresense). 
 You can find a bunch of technical documents
+
 The driver of BMI270 used a part of [this Arduino library](https://github.com/arduino-libraries/Arduino_BMI270_BMM150) 
 and added a minor modification to select the I2C device address in the begin function.
+
 The driver of BMP581 used [this Sparkfun Arduino library](https://github.com/sparkfun/SparkFun_BMP581_Arduino_Library)
-Altimeter estimates altitude by a two-step Kalman/Complmentary filter fusing values of the barometer, the accelerometer and gyroscope.
+
+Altimeter estimates altitude by a two-step Kalman/Complimentary filter fusing values of the barometer, the accelerometer, and the gyroscope.
 The implementation of the two-step Kalman/Complementary filter comes [here](https://github.com/juangallostra/AltitudeEstimation/tree/master), 
 and the algorithm is explained in [this paper](https://simondlevy.academic.wlu.edu/files/2022/11/TwoStepFilter.pdf).
 
