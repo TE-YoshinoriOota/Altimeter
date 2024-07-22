@@ -12,11 +12,11 @@ The system fusing an IMU sensor and a barometer can reduce large fluctuations ov
 <br/>
 
 
-Once you can obtain a stable altitude, you can achieve a more precise measurement of height between two different positions.
-If altitude is measured with only one device, the value will be significantly affected by weather conditions over long periods.
+Once you can obtain a stable altitude, you can get a more precise height between two different altitudes.
+When altitude is measured with only one sensor, the value will be significantly affected by weather conditions over long periods.
 If you can set a base sensor on the ground and a hand-carried sensor with you, you can get a precise height from the ground 
 by taking the difference between the value of the base sensor and the value of the hand-carried sensor.
-In my experiments, the accuracy achieved to ±0.15 m.
+In my experiments, the accuracy achieved to ±0.15 m. See the below graph.
 
 ![image](https://github.com/user-attachments/assets/22fe7304-3baf-4bcc-8de9-8f0c9c1ca5a9)
 
