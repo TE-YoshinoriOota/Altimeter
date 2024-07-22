@@ -5,7 +5,7 @@ The motivation for fusing an IMU sensor and a barometer is to get stable altitud
 An altitude measurement system using only a barometer is unstable because the air pressure is constantly changing. 
 For example, the air pressure is significantly affected by strong winds or the opening and closing of doors.
 
-The system fusing an IMU sensor and a barometer can reduce large fluctuations over short periods. The graph below shows a comparison of the altitude estimation data between the barometer and the IMU/barometer fusion system. It seems that there is a time delay in the IMU and the Barometer fusion data due to the Kalman filter. However, the effect of noise reduction is quite good.
+The system fusing an IMU sensor and a barometer can reduce large fluctuations over short periods. The graph below shows a comparison of the altitude estimation data between the barometer and the IMU/barometer fusion system. It seems that there is a time delay in the IMU/Barometer fusion data due to the Kalman filter. However, the effect of noise reduction is quite good.
 
 ![image](https://github.com/user-attachments/assets/7ce72d97-9529-451d-9037-b912e8258149)
 
