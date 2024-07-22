@@ -86,20 +86,26 @@ You can get the Arduino library from [here](https://github.com/TE-YoshinoriOota/
 ### Overview of Altimeter Library
 First of all, this Altimeter Library is designed for the Arduino platform. Users can use this library with the Arduino IDE and the Spresense Arduino Library.
 
+#### To begin the system
 The Altimeter library is initialized by calling the "begin" function. The device addresses of the BMI270 and BMP581 can be specified through the arguments of the "begin" function.
 
+#### Calibration is needed before sensing altitude
 Before sensing altitude, the altimeter should be calibrated by calling "startCalibration." Depending on the environment, this process can take tens of seconds. The end of calibration can be detected by calling the "isCalibrated" function. "startCalibration" can set a timeout, but the default is no timeout. The calibration algorithm uses two parameters: the calibration conversion threshold value of the fluctuation of the Kalman/Complementary filter output, and the differential threshold value between the barometer output and the filter output. The "setCalibConversionThresh" function can set the calibration conversion threshold value, and the "setCalibDiffThresh" function can set the differential threshold value. These functions should be called before "startCalibration" if you want to change these parameters.
 
+#### Sensing altitude
 The "startSensing" function starts sensing altitude. The sensing process has two stages. The first stage is to accumulate sensed and estimated altitude data, and the second stage is to calculate and filter the accumulated altitude data. The updated altitude data is processed using an IIR filter and an average filter. The sample number of the average filter can be calculated by dividing the update interval time by the sensing interval time. The default is 50 samples (= 1000 msec / 20 msec). There are two ways to end altitude sensing: one way is to set the monitoring time by specifying the argument of "startSensing", and the other way is to call "endSensing".
 
+#### Kalman/Complementary filter tuning
 The important parameters for the Kalman/Complementary filter can be set by the functions of "setAccelSigma", "setGyroSigma", "setBaroSigma", "setConstantAccel", "setAccelThreshold". For the technical background of these parameters, please refer to [this paper](https://simondlevy.academic.wlu.edu/files/2022/11/TwoStepFilter.pdf).
 
+#### To set the sea level pressure
 "setSeaLevelPressure" can set the sea level pressure value. If you can get the sea level pressure value through the internet, you may acquire precise altitude values. The default value is 1013.25 Pa for tentative.
 
+#### To get sensed values
 The "getTemperature" and "getPressure" return BMP581 output. These values are filtered by an IIR filter and an average filter if they are enabled.
-The "getAltitude" returns the estimated altitude value. In the barometer mode, it returns the altitude value estimated by the barometer value. In the fusion mode, it returns the altitude value estimated by Kalman/Complementary filter value.
+The "getAltitude" returns the estimated altitude value. In the barometer mode, the altitude value estimated by the barometer value is returned. In the fusion mode, the altitude value estimated by Kalman/Complementary filter value is returned.
 
-
+#### Overview of Altimeter APIs
 | API name                 | Description | Default |
 | ------------------------ | ----------- | ------- |
 | begin                    | begin the library | BMI270 address: BMI2_I2C_SEC_ADDR, <br/> BMP581 address: BMP581_I2C_ADDRESS_DEFAULT  |
