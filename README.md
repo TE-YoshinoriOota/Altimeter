@@ -84,8 +84,9 @@ You can get the Arduino library from [here](https://github.com/TE-YoshinoriOota/
 
 
 ### Overview of Altimeter Library
+First of all, this Altimeter Library is designed for the Arduino platform. Users can use this library with the Arduino IDE and the Spresense Arduino Library.
 
-The Altimeter library is started by calling the "begin" function. The device addresses of the BMI270 and BMP581 can be specified through the arguments of the begin function.
+The Altimeter library is initialized by calling the "begin" function. The device addresses of the BMI270 and BMP581 can be specified through the arguments of the "begin" function.
 
 Before sensing altitude, the altimeter should be calibrated by calling "startCalibration." Depending on the environment, this process can take tens of seconds. The end of calibration can be detected by calling the "isCalibrated" function. "startCalibration" can set a timeout, but the default is no timeout. The calibration algorithm uses two parameters: the calibration conversion threshold value of the fluctuation of the Kalman/Complementary filter output, and the differential threshold value between the barometer output and the filter output. The "setCalibConversionThresh" function can set the calibration conversion threshold value, and the "setCalibDiffThresh" function can set the differential threshold value. These functions should be called before "startCalibration" if you want to change these parameters.
 
