@@ -95,6 +95,7 @@ You can get the Arduino library from [here](https://github.com/TE-YoshinoriOota/
 
 ![image](https://github.com/user-attachments/assets/1c7bcd55-1adb-4024-8c72-2d637f3400f3)
 
+<br/><br/>
 
 ### Overview of Altimeter Library
 First of all, this Altimeter Library is designed for the Arduino platform. Users can use this library with the Arduino IDE and the Spresense Arduino Library.
@@ -149,6 +150,8 @@ The "getAltitude" returns the estimated altitude value. In the barometer mode, t
 | getBaroAltitude          | return the estimated altitude value by the barometer (BMP581) output  |    |
 
 For details of these APIs, please refer to the [header file](https://github.com/TE-YoshinoriOota/Altimeter/blob/main/src/Altimeter.h) of this library.
+
+<br/><br/>
 
 # License
 This program contains multiple open-source licenses.
