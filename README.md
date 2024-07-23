@@ -32,6 +32,8 @@ In my experiments, the accuracy achieved to ±0.15 m. See the below graph.
 ![image](https://github.com/user-attachments/assets/0a91027a-e1a2-4c4e-869a-3716b5680ff7)
 
 
+<br/><br/>
+
 # Hardware Configuration
 Here is the hardware configuration for the Altimeter system. The base altimeter and the hand-carried altimeter are the same system. But in my case, I used the Spresense LTE-M Extension board to get the small form factor to do the test easily. It means that you can also use LTE-M for communication.
 
@@ -47,6 +49,8 @@ Here is the hardware configuration for the Altimeter system. The base altimeter 
 ### Hand-carried Altimeter Configuration
 Hand-carried Altimeter uses Spresense LTE-M Extension Board to get the small form factor.
 ![image](https://github.com/user-attachments/assets/a7f2e391-faaf-40c2-9303-ccb9e175de50)
+
+<br/><br/>
 
 # Software Configuration
 For details about the Spresense development environment, please visit [this site](https://developer.sony.com/spresense). 
