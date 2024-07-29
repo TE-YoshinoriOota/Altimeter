@@ -4,7 +4,7 @@ This program package can obtain a precise height by calculating the differential
 
 <br/>
 
-![image](https://github.com/user-attachments/assets/1c7bcd55-1adb-4024-8c72-2d637f3400f3)
+<!-- ![image](https://github.com/user-attachments/assets/1c7bcd55-1adb-4024-8c72-2d637f3400f3) -->
 
 <br/>
 
