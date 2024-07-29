@@ -1,6 +1,6 @@
 # README
 
-This program package can obtain a precise height by calculating the differential altitude between the device (hand-carried) altimeter and the base altimeter. Since the base altimeter and the device (hand-carried) altimeter use BLE1507,  You need to install the BLE1507 Arduino library first. 
+This program package can obtain a precise height by calculating the differential altitude between the device (hand-carried) altimeter and the base altimeter. Since the base altimeter and the device (hand-carried) altimeter use BLE1507,  You need to install the [BLE1507 Arduino library](https://github.com/TE-YoshinoriOota/BLE1507_Arduino) first. 
 
 <br/>
 
