@@ -72,7 +72,7 @@ class AltimeterClass {
               );
     void startCalibration(uint32_t timeout_ms = 0);
     void startSensing(uint32_t duration_sec = 0);
-    void endSensing() { m_monitor_end = true; }
+    void endSensing() { m_monitor_end = true; m_calibrated = false; }
 
     void setSensingInteraval(int msec) { m_interval_msec = msec; }
     void setUpdateInterval(int sec) { m_update_sec = sec; }
