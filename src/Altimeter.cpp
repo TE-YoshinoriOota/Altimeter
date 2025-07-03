@@ -47,10 +47,10 @@ extern "C" {
     }
 
     static uint32_t start_calibration_time_ms = millis();
-    float last_baro_altitude = 0.0;
-    float last_fusion_altitude = 0.0;
+    float last_baro_altitude = Altimeter.getBaroAltitude();
+    float last_fusion_altitude = Altimeter.getFusionAltitude();
 
-    while (!Altimeter.isMonitorEnd()) {
+    while (!Altimeter.isCalibrated()) {
       /* acquire altitude data */
       float pressure, temp, baro_altitude, fusion_altitude;
       Altimeter.altitude_estimation(
@@ -130,7 +130,7 @@ extern "C" {
     static uint32_t start_monitor_time_sec = millis() / 1000;
     static uint32_t last_update_sec = 0;
 
-    while (true) {
+    while (!Altimeter.isMonitorEnd()) {
 
       uint32_t current_sec = millis() / 1000;
 
@@ -163,6 +163,7 @@ extern "C" {
       /* sleep to yeild computing resources to other process */
       usleep(Altimeter.getSensingInterval()*1000);
     }
+    Altimeter.initMonitorEnd();
     return nullptr;
   }
 
