@@ -122,6 +122,7 @@ class AltimeterClass {
     friend void* do_monitor_thread(void*arg);
     /** these functions are used by thread functions **/
     bool isMonitorEnd() { return m_monitor_end; }
+    void initMonitorEnd() { m_monitor_end = false; }
     void setCalibrated() { m_calibrated = true; }
     void push_pressure(float pressure);
     void push_temp(float temp);
